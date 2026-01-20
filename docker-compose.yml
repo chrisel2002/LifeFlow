@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    container_name: lifeflow_db
+    environment:
+      POSTGRES_USER: lifeflow
+      POSTGRES_PASSWORD: lifeflow
+      POSTGRES_DB: lifeflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - lifeflow_pgdata:/var/lib/postgresql/data
+
+volumes:
+  lifeflow_pgdata:
