@@ -32,6 +32,7 @@
 //     </html>
 //   );
 // }
+import { Toaster } from "sonner";
 export default function RootLayout({
   children,
 }: {
@@ -39,7 +40,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{ margin: 0, fontFamily: "system-ui, Arial" }}>{children}</body>
+      <body style={{ margin: 0, fontFamily: "system-ui, Arial" }}>{children}
+        <Toaster richColors position="top-right" />
+      </body>
     </html>
   );
 }

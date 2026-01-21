@@ -21,6 +21,14 @@ model Category {
   expenses  Expense[]
 }
 
+enum ExpenseStatus{
+  CREATED 
+  SUBMITTED
+  APPROVED
+  PAID
+  ARCHIVED
+}
+
 model Expense {
   id        String  @id @default(cuid())
   title     String
@@ -28,9 +36,10 @@ model Expense {
   currency  String  @default("EUR")
   spentAt   DateTime
   createdAt DateTime @default(now())
-
-  categoryId  String?
-  Category    Category? @relation(fields: [categoryId], references: [id])
+  updatedAt DateTime @default(now()) @updatedAt
+  status    ExpenseStatus @default(CREATED)
+  categoryId  String
+  Category    Category @relation(fields: [categoryId], references: [id])
 }
 
 
