@@ -1,5 +1,7 @@
+import { API_Base } from "@/lib/api";
+await fetch(`${API_Base}/categories`, { cache: "no-store" });
 export default async function CategoriesPage() {
-  const res = await fetch("http://localhost:3001/categories", {
+  const res = await fetch(`${API_Base}/categories`, {
     cache: "no-store",
   });
 
