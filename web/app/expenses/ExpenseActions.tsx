@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { NEXT_ACTION } from "./transitions";
+import type { ExpenseStatus } from "./types";
+import { transitionExpense } from "./api";
 
 export function ExpenseActions({
   id,
@@ -10,28 +12,26 @@ export function ExpenseActions({
   onDone,
 }: {
   id: string;
-  status: "CREATED" | "SUBMITTED" | "APPROVED" | "PAID" | "ARCHIVED";
+  status: ExpenseStatus;
   onDone?: () => void;
 }) {
   const [loading, setLoading] = useState(false);
   const action = NEXT_ACTION[status];
 
-if (action === null) return null;
+if (!action) return null;
 
 const { endpoint, label, next } = action;
-
-  if (!action) return null;
 
   async function run() {
     setLoading(true);
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/expenses/${id}/${endpoint}`,
-        { method: "PATCH" }
-      );
+      // const res = await fetch(
+      //   `${process.env.NEXT_PUBLIC_API_URL}/expenses/${id}/${endpoint}`,
+      //   { method: "PATCH" }
+      // );
 
-      if (!res.ok) throw new Error("Failed to update status");
-
+      // if (!res.ok) throw new Error("Failed to update status");
+      await transitionExpense(id, endpoint);
       toast.success(`Moved to ${next}`);
       onDone?.();
     } catch (e) {
@@ -47,7 +47,7 @@ const { endpoint, label, next } = action;
       disabled={loading}
       className="rounded bg-black px-3 py-1.5 text-sm text-white disabled:opacity-50"
     >
-      {loading ? "Updating..." : action.label}
+      {loading ? "Updating..." : label}
     </button>
   );
 }

@@ -1,4 +1,4 @@
-type ExpenseStatus = "CREATED" | "SUBMITTED" | "APPROVED" | "PAID" | "ARCHIVED";
+import type { ExpenseStatus } from "./types";
 
 const LABEL: Record<ExpenseStatus, string> = {
   CREATED: "Created ✅",

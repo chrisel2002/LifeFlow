@@ -1,6 +1,8 @@
+ import type { ExpenseStatus } from "./types";
+ 
  export const NEXT_ACTION: Record<
-  "CREATED" | "SUBMITTED" | "APPROVED" | "PAID" | "ARCHIVED",
-  { label: string; endpoint: "submit" | "approve" | "pay"; next: string } | null
+  ExpenseStatus,
+  { label: string; endpoint: "submit" | "approve" | "pay"; next: ExpenseStatus } | null
 > = {
   CREATED: { label: "Submit", endpoint: "submit", next: "SUBMITTED" },
   SUBMITTED: { label: "Approve", endpoint: "approve", next: "APPROVED" },

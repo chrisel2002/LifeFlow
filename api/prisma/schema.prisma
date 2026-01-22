@@ -30,7 +30,7 @@ enum ExpenseStatus{
 }
 
 model Expense {
-  id        String  @id @default(cuid())
+  id Int @id @default(autoincrement())
   title     String
   amount    Float
   currency  String  @default("EUR")
